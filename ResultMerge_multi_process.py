@@ -13,8 +13,8 @@ sys.path.insert(0,'..')
 try:
     import dota_utils as util
 except:
-    import dota_kit.dota_utils as util
-import polyiou
+    import datasets.DOTA_devkit.dota_utils as util
+from datasets.DOTA_devkit import polyiou
 import pdb
 import math
 from multiprocessing import Pool
