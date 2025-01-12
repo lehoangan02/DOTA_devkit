@@ -11,3 +11,9 @@ __pycache__/
 Task1_merge/*.txt
 Task1/*.txt
 restoredexample/*
+/example/images
+/example/labelTxt
+/MiniTrainV1.1
+/MiniTrainV1
+MiniTrainV1.1.zip
+MiniTrainV1.zip

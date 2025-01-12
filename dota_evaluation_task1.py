@@ -148,13 +148,13 @@ def voc_eval(detpath,
     for imagename in imagenames:
         R = [obj for obj in recs[imagename] if obj['name'] == classname]
         bbox = np.array([x['bbox'] for x in R])
-        difficult = np.array([x['difficult'] for x in R]).astype(np.bool)
+        difficult = np.array([x['difficult'] for x in R]).astype(np.bool_)
         det = [False] * len(R)
         npos = npos + sum(~difficult)
         class_recs[imagename] = {'bbox': bbox,
                                  'difficult': difficult,
                                  'det': det}
-
+        
     # read dets from Task1* files
     detfile = detpath.format(classname)
     with open(detfile, 'r') as f:
@@ -278,9 +278,12 @@ def main():
     # classnames = ['plane', 'baseball-diamond', 'bridge', 'ground-track-field', 'small-vehicle', 'large-vehicle', 'ship', 'tennis-court',
     #             'basketball-court', 'storage-tank',  'soccer-ball-field', 'roundabout', 'harbor', 'swimming-pool', 'helicopter']
 
-    detpath = r'PATH_TO_BE_CONFIGURED/Task1_{:s}.txt'
-    annopath = r'PATH_TO_BE_CONFIGURED/{:s}.txt' # change the directory to the path of val/labelTxt, if you want to do evaluation on the valset
-    imagesetfile = r'PATH_TO_BE_CONFIGURED/valset.txt'
+    # detpath = r'PATH_TO_BE_CONFIGURED/Task1_{:s}.txt'
+    # annopath = r'PATH_TO_BE_CONFIGURED/{:s}.txt' # change the directory to the path of val/labelTxt, if you want to do evaluation on the valset
+    # imagesetfile = r'PATH_TO_BE_CONFIGURED/valset.txt'
+    detpath = r'./../../result_dota/Task1_bridge.txt'
+    annopath = r'./MiniTrainV1/annoBridge.txt' # change the directory to the path of val/labelTxt, if you want to do evaluation on the valset
+    imagesetfile = r'./MiniTrainV1/trainval.txt'
 
     # For DOTA-v1.5
     # classnames = ['plane', 'baseball-diamond', 'bridge', 'ground-track-field', 'small-vehicle', 'large-vehicle', 'ship', 'tennis-court',

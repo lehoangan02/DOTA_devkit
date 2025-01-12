@@ -47,8 +47,8 @@ class splitbase():
                  outpath,
                  code = 'utf-8',
                  gap=512,
-                 subsize=1024,
-                 thresh=0.7,
+                 subsize=608,
+                 thresh=0.1,
                  choosebestpoint=True,
                  ext = '.png',
                  padding=True,
@@ -280,7 +280,7 @@ class splitbase():
     def __setstate__(self, state):
         self.__dict__.update(state)
 if __name__ == '__main__':
-    # example usage of ImgSplit
+    #  usage of ImgSplit
     # start = time.clock()
     # split = splitbase(r'/data/dj/dota/val',
     #                    r'/data/dj/dota/val_1024_debugmulti-process_refactor') # time cost 19s
@@ -291,10 +291,10 @@ if __name__ == '__main__':
     # elapsed = (time.clock() - start)
     # print("Time used:", elapsed)
 
-    split = splitbase(r'/home/dingjian/data/dota/val',
-                       r'/home/dingjian/data/dota/valsplit',
+    split = splitbase(r'./example',
+                       r'./NewSplitFull',
                       gap=200,
-                      subsize=1024,
+                      subsize=608,
                       num_process=8
                       )
     split.splitdata(1)

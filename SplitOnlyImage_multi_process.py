@@ -14,7 +14,7 @@ class splitbase():
                  srcpath,
                  dstpath,
                  gap=100,
-                 subsize=1024,
+                 subsize=608,
                  ext='.png',
                  padding=True,
                  num_process=32):
@@ -98,7 +98,7 @@ class splitbase():
         self.__dict__.update(state)
 
 if __name__ == '__main__':
-    split = splitbase(r'/home/dingjian/data/dota/val/images',
-                      r'/home/dingjian/data/dota/valsplit',
-                      num_process=32)
+    split = splitbase(r'./example/images',
+                      r'./NewSplitFull',
+                      num_process=8)
     split.splitdata(1)
