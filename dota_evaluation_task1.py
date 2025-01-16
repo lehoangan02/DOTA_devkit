@@ -253,7 +253,7 @@ def voc_eval(detpath,
 
     # compute precision recall
 
-    print('check fp:', fp)
+    # print('check fp:', fp)
     print('check tp', tp)
 
 
@@ -281,9 +281,9 @@ def main():
     # detpath = r'PATH_TO_BE_CONFIGURED/Task1_{:s}.txt'
     # annopath = r'PATH_TO_BE_CONFIGURED/{:s}.txt' # change the directory to the path of val/labelTxt, if you want to do evaluation on the valset
     # imagesetfile = r'PATH_TO_BE_CONFIGURED/valset.txt'
-    detpath = r'./../../result_dota/Task1_bridge.txt'
+    detpath = r'./../../merge_dota/Task1_bridge.txt'
     annopath = r'./MiniTrainV1.1/annoBridge.txt' # change the directory to the path of val/labelTxt, if you want to do evaluation on the valset
-    imagesetfile = r'./MiniTrainV1.1/trainval.txt'
+    imagesetfile = r'./MiniTrainV1.1/test.txt'
 
     # For DOTA-v1.5
     # classnames = ['plane', 'baseball-diamond', 'bridge', 'ground-track-field', 'small-vehicle', 'large-vehicle', 'ship', 'tennis-court',

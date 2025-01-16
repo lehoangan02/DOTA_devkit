@@ -40,15 +40,16 @@ def cal_line_length(point1, point2):
 
 def split_single_warp(name, split_base, rate, extent):
     split_base.SplitSingle(name, rate, extent)
-
+print("hello")
+print("IMG SPLIT MULTI PROCESS")
 class splitbase():
     def __init__(self,
                  basepath,
                  outpath,
                  code = 'utf-8',
-                 gap=512,
+                 gap=100,
                  subsize=608,
-                 thresh=0.1,
+                 thresh=1,
                  choosebestpoint=True,
                  ext = '.png',
                  padding=True,
@@ -293,9 +294,10 @@ if __name__ == '__main__':
 
     split = splitbase(r'./example',
                        r'./NewSplitFull',
-                      gap=200,
+                      gap=100,
                       subsize=608,
                       num_process=8
                       )
+    split.splitdata(0.5)
     split.splitdata(1)
 

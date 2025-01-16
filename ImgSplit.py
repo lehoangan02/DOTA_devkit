@@ -240,6 +240,7 @@ class splitbase():
 
 if __name__ == '__main__':
     # example usage of ImgSplit
-    split = splitbase(r'example',
-                       r'examplesplit')
+    split = splitbase(r'./example',
+                       r'./Hello')
     split.splitdata(1)
+    
