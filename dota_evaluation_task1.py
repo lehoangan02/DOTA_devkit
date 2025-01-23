@@ -167,6 +167,9 @@ def voc_eval(detpath,
     #print('check confidence: ', confidence)
 
     BB = np.array([[float(z) for z in x[2:]] for x in splitlines])
+    if BB.size == 0:
+        print('No detections found.')
+        return 0, 0, 0
 
     # sort by confidence
     sorted_ind = np.argsort(-confidence)
@@ -281,9 +284,9 @@ def main():
     # detpath = r'PATH_TO_BE_CONFIGURED/Task1_{:s}.txt'
     # annopath = r'PATH_TO_BE_CONFIGURED/{:s}.txt' # change the directory to the path of val/labelTxt, if you want to do evaluation on the valset
     # imagesetfile = r'PATH_TO_BE_CONFIGURED/valset.txt'
-    detpath = r'./../../merge_dota/Task1_bridge.txt'
-    annopath = r'./MiniTrainV1.1/annoBridge.txt' # change the directory to the path of val/labelTxt, if you want to do evaluation on the valset
-    imagesetfile = r'./MiniTrainV1.1/test.txt'
+    detpath = r'./../../result_dota/Task1_{:s}.txt'
+    annopath = r'./../MiniTrainV1.1/labelTxt/{:s}.txt' # change the directory to the path of val/labelTxt, if you want to do evaluation on the valset
+    imagesetfile = r'./../MiniTrainV1.1/val.txt'
 
     # For DOTA-v1.5
     # classnames = ['plane', 'baseball-diamond', 'bridge', 'ground-track-field', 'small-vehicle', 'large-vehicle', 'ship', 'tennis-court',
