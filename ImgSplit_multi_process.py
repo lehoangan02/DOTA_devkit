@@ -47,8 +47,8 @@ class splitbase():
                  basepath,
                  outpath,
                  code = 'utf-8',
-                 gap=100,
-                 subsize=608,
+                 gap=9,
+                 subsize=10,
                  thresh=1,
                  choosebestpoint=True,
                  ext = '.png',
@@ -292,12 +292,12 @@ if __name__ == '__main__':
     # elapsed = (time.clock() - start)
     # print("Time used:", elapsed)
 
-    split = splitbase(r'./example',
-                       r'./NewSplitFull',
+    split = splitbase(r'./../BridgeTrainFull',
+                       r'./HalfScale_BridgeTrainFull',
                       gap=100,
                       subsize=608,
                       num_process=8
                       )
     split.splitdata(0.5)
-    split.splitdata(1)
+    # split.splitdata(1)
 

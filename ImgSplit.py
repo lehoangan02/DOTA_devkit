@@ -36,9 +36,9 @@ class splitbase():
                  basepath,
                  outpath,
                  code = 'utf-8',
-                 gap=100,
-                 subsize=608,
-                 thresh=0.1,
+                 gap=300,
+                 subsize=300,
+                 thresh=1,
                  choosebestpoint=True,
                  ext = '.png'
                  ):
@@ -54,7 +54,7 @@ class splitbase():
         :param ext: ext for the image format
         """
         self.basepath = basepath
-        self.outpath = './MiniTrainV1.1'
+        self.outpath = './Hello'
         self.code = code
         self.gap = gap
         self.subsize = subsize
