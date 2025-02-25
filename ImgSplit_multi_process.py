@@ -293,11 +293,11 @@ if __name__ == '__main__':
     # print("Time used:", elapsed)
 
     split = splitbase(r'./../BridgeTrainFull',
-                       r'./HalfScale_BridgeTrainFull',
+                       r'./ThreeQuarter_BridgeTrainFull',
                       gap=100,
                       subsize=608,
                       num_process=8
                       )
-    split.splitdata(0.5)
+    split.splitdata(0.75)
     # split.splitdata(1)
 
