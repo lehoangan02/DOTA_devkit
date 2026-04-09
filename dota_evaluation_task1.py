@@ -284,9 +284,9 @@ def main():
     # detpath = r'PATH_TO_BE_CONFIGURED/Task1_{:s}.txt'
     # annopath = r'PATH_TO_BE_CONFIGURED/{:s}.txt' # change the directory to the path of val/labelTxt, if you want to do evaluation on the valset
     # imagesetfile = r'PATH_TO_BE_CONFIGURED/valset.txt'
-    detpath = r'./../../result_dota/Task1_{:s}.txt'
-    annopath = r'./../Validate_DOTA_1_0.5/labelTxt/{:s}.txt' # change the directory to the path of val/labelTxt, if you want to do evaluation on the valset
-    imagesetfile = r'./../Validate_DOTA_1_0.5/val.txt'
+    detpath = r'./../../merge_dota/Task1_{:s}.txt'
+    annopath = r'./../../../DATA/labelTxt/{:s}.txt' # change the directory to the path of val/labelTxt, if you want to do evaluation on the valset
+    imagesetfile = r'./../../../DATA/test.txt'
 
     # For DOTA-v1.5
     # classnames = ['plane', 'baseball-diamond', 'bridge', 'ground-track-field', 'small-vehicle', 'large-vehicle', 'ship', 'tennis-court',
