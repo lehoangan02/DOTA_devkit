@@ -18,6 +18,18 @@ import matplotlib.pyplot as plt
 import polyiou
 from functools import partial
 
+
+def _read_label_lines(filename):
+    # Some label files may not be UTF-8; try common encodings used by datasets.
+    for encoding in ('utf-8', 'utf-8-sig', 'gb18030', 'latin1'):
+        try:
+            with open(filename, 'r', encoding=encoding) as f:
+                return f.readlines()
+        except UnicodeDecodeError:
+            continue
+    with open(filename, 'r', encoding='utf-8', errors='replace') as f:
+        return f.readlines()
+
 def parse_gt(filename):
     """
 
@@ -25,31 +37,30 @@ def parse_gt(filename):
     :return: all instances in a picture
     """
     objects = []
-    with  open(filename, 'r') as f:
-        while True:
-            line = f.readline()
-            if line:
-                splitlines = line.strip().split(' ')
-                object_struct = {}
-                if (len(splitlines) < 9):
-                    continue
-                object_struct['name'] = splitlines[8]
+    for line in _read_label_lines(filename):
+        splitlines = line.strip().split()
+        object_struct = {}
+        if (len(splitlines) < 9):
+            continue
+        object_struct['name'] = splitlines[8]
 
-                if (len(splitlines) == 9):
-                    object_struct['difficult'] = 0
-                elif (len(splitlines) == 10):
-                    object_struct['difficult'] = int(splitlines[9])
-                object_struct['bbox'] = [float(splitlines[0]),
-                                         float(splitlines[1]),
-                                         float(splitlines[2]),
-                                         float(splitlines[3]),
-                                         float(splitlines[4]),
-                                         float(splitlines[5]),
-                                         float(splitlines[6]),
-                                         float(splitlines[7])]
-                objects.append(object_struct)
-            else:
-                break
+        try:
+            if (len(splitlines) == 9):
+                object_struct['difficult'] = 0
+            elif (len(splitlines) >= 10):
+                object_struct['difficult'] = int(splitlines[9])
+            object_struct['bbox'] = [float(splitlines[0]),
+                                     float(splitlines[1]),
+                                     float(splitlines[2]),
+                                     float(splitlines[3]),
+                                     float(splitlines[4]),
+                                     float(splitlines[5]),
+                                     float(splitlines[6]),
+                                     float(splitlines[7])]
+        except ValueError:
+            # Skip malformed lines (e.g. sidecar metadata or binary fragments).
+            continue
+        objects.append(object_struct)
     return objects
 def voc_ap(rec, prec, use_07_metric=False):
     """ ap = voc_ap(rec, prec, [use_07_metric])
@@ -284,9 +295,21 @@ def main():
     # detpath = r'PATH_TO_BE_CONFIGURED/Task1_{:s}.txt'
     # annopath = r'PATH_TO_BE_CONFIGURED/{:s}.txt' # change the directory to the path of val/labelTxt, if you want to do evaluation on the valset
     # imagesetfile = r'PATH_TO_BE_CONFIGURED/valset.txt'
-    detpath = r'./../../merge_dota/Task1_{:s}.txt'
-    annopath = r'./../../../DATA/labelTxt/{:s}.txt' # change the directory to the path of val/labelTxt, if you want to do evaluation on the valset
-    imagesetfile = r'./../../../DATA/test.txt'
+    project_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+    merge_dir = os.environ.get('MERGE_DIR', os.path.join(project_dir, 'merge_dota'))
+    anno_dir = os.environ.get('LABEL_DIR', '/Volumes/ExternalSSD/data/labelTxt')
+    imagesetfile = os.environ.get('IMAGESET_FILE', '/Volumes/ExternalSSD/data/val_orig.txt')
+
+    detpath = os.path.join(merge_dir, 'Task1_{:s}.txt')
+    annopath = os.path.join(anno_dir, '{:s}.txt')
+    # Derive original image names from labelTxt directory (avoids using patch-named test.txt)
+    orig_names = sorted(
+        os.path.splitext(f)[0]
+        for f in os.listdir(anno_dir)
+        if f.endswith('.txt') and not f.startswith('.')
+    )
+    with open(imagesetfile, 'w') as _f:
+        _f.write('\n'.join(orig_names) + '\n')
 
     # For DOTA-v1.5
     # classnames = ['plane', 'baseball-diamond', 'bridge', 'ground-track-field', 'small-vehicle', 'large-vehicle', 'ship', 'tennis-court',
